@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  
+  /* ECPB Theme Colors */
+  --color-primary: #0B6F3F;
+  --color-secondary: #689b3e;
+  --color-accent: #C9B037;
+
+  --color-primary-light: #F0F8F4; /* 95% lighter - great for card backgrounds */
+  --color-primary-lighter: #E1F1E8; /* 90% lighter - good for hover states */
+  --color-primary-subtle: #D2EADC; /* 85% lighter - for borders or dividers */
+
+
+  --ecpb-primary: var(--color-primary);
+  --ecpb-primary-hover: color-mix(in srgb, var(--color-primary) 90%, black 10%);
+  --ecpb-secondary: var(--color-secondary);
+  --ecpb-secondary-hover: color-mix(in srgb, var(--color-secondary) 90%, black 10%);
+  --ecpb-accent: var(--color-accent);
+  --ecpb-accent-hover: color-mix(in srgb, var(--color-accent) 90%, black 10%);
+
+
+  /* Alert Colors */
+  --alert-info-bg: #E6F4FB;
+  --alert-info-border: #3ABFF8;
+  --alert-info-text: #0C4A6E;
+  --alert-success-bg: #E6F9F0;
+  --alert-success-border: #36D399;
+  --alert-success-text: #064E3B;
+  --alert-warning-bg: #FFF8E6;
+  --alert-warning-border: #FBBD23;
+  --alert-warning-text: #78350F;
+  --alert-error-bg: #FDECEC;
+  --alert-error-border: #F87272;
+  --alert-error-text: #7F1D1D;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-poppins), system-ui, -apple-system, sans-serif;
+    font-weight: bold;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+/* Custom DaisyUI theme - ecpbEmeraldTheme */
+@layer components {
+  [data-theme="ecpbEmeraldTheme"] .btn-primary {
+    background-color: var(--ecpb-primary) !important;
+    border-color: var(--ecpb-primary) !important;
+    color: white !important;
+  }
+
+  [data-theme="ecpbEmeraldTheme"] .btn-primary:hover {
+    background-color: var(--ecpb-primary-hover) !important;
+    border-color: var(--ecpb-primary-hover) !important;
+  }
+
+  [data-theme="ecpbEmeraldTheme"] .btn-secondary {
+    background-color: var(--ecpb-secondary) !important;
+    border-color: var(--ecpb-secondary) !important;
+    color: white !important;
+  }
+
+  [data-theme="ecpbEmeraldTheme"] .btn-secondary:hover {
+    background-color: var(--ecpb-secondary-hover) !important;
+    border-color: var(--ecpb-secondary-hover) !important;
+  }
+
+  [data-theme="ecpbEmeraldTheme"] .btn-accent {
+    background-color: var(--ecpb-accent) !important;
+    border-color: var(--ecpb-accent) !important;
+    color: white !important;
+  }
+
+  [data-theme="ecpbEmeraldTheme"] .btn-accent:hover {
+    background-color: var(--ecpb-accent-hover) !important;
+    border-color: var(--ecpb-accent-hover) !important;
+  }
+
+  [data-theme="ecpbEmeraldTheme"] .bg-primary {
+    background-color: var(--ecpb-primary) !important;
+  }
+
+  [data-theme="ecpbEmeraldTheme"] .bg-secondary {
+    background-color: var(--ecpb-secondary) !important;
+  }
+
+  [data-theme="ecpbEmeraldTheme"] .bg-accent {
+    background-color: var(--ecpb-accent) !important;
+  }
+
+  [data-theme="ecpbEmeraldTheme"] .text-primary {
+    color: var(--ecpb-primary) !important;
+  }
+
+  [data-theme="ecpbEmeraldTheme"] .border-primary {
+    border-color: var(--ecpb-primary) !important;
+  }
+
+  [data-theme="ecpbEmeraldTheme"] .alert-info {
+    background-color: var(--alert-info-bg) !important;
+    border-color: var(--alert-info-border) !important;
+    color: var(--alert-info-text) !important;
+  }
+
+  [data-theme="ecpbEmeraldTheme"] .alert-success {
+    background-color: var(--alert-success-bg) !important;
+    border-color: var(--alert-success-border) !important;
+    color: var(--alert-success-text) !important;
+  }
+
+  [data-theme="ecpbEmeraldTheme"] .alert-warning {
+    background-color: var(--alert-warning-bg) !important;
+    border-color: var(--alert-warning-border) !important;
+    color: var(--alert-warning-text) !important;
+  }
+
+  [data-theme="ecpbEmeraldTheme"] .alert-error {
+    background-color: var(--alert-error-bg) !important;
+    border-color: var(--alert-error-border) !important;
+    color: var(--alert-error-text) !important;
+  }
+
+  [data-theme="ecpbEmeraldTheme"] .menu a {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  [data-theme="ecpbEmeraldTheme"] .menu a:hover {
+    background: none; 
+    color: var(--ecpb-primary) !important;
+  }
+}
+
+
