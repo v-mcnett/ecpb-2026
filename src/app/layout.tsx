@@ -3,6 +3,8 @@ import Footer from '@/components/layout/Footer'
 import './globals.css'
 import type { Metadata } from 'next'
 import { inter, poppins } from '@/app/fonts'
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 // Apply fonts globally using CSS variables
 const fontVariables = `${inter.variable} ${poppins.variable}`
@@ -34,6 +36,8 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )

@@ -1,4 +1,4 @@
- import { SiFacebook, SiInstagram, SiX, SiPinterest } from '@icons-pack/react-simple-icons';
+ import { SiFacebook, SiInstagram, SiPinterest } from '@icons-pack/react-simple-icons';
 
 export default function Footer() {
   return (

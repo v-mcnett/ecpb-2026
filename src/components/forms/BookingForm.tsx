@@ -35,7 +35,24 @@ export default function BookingForm() {
   });
   
   const result = await response.json();
+
+  console.log(result); // For debugging - remove in production
   // Handle success/error
+  if (response.ok) {
+    alert('Booking request submitted successfully!');
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      eventDate: '',
+      eventType: '',
+      package: 'silver',
+      venue: '',
+      notes: ''
+    }); // Reset form
+  } else {
+    alert('Failed to submit booking request. Please try again.');
+  } 
 };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
