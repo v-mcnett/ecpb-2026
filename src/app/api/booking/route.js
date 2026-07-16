@@ -5,50 +5,93 @@ import { google } from 'googleapis';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// Initialize Google Sheets
-const auth = new google.auth.GoogleAuth({
-  credentials: JSON.parse(process.env.GOOGLE_SHEETS_CREDENTIALS),
-  scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-});
+let sheetsClient = null;
 
-const sheets = google.sheets({ version: 'v4', auth });
-const SPREADSHEET_ID = process.env.GOOGLE_SHEET_ID;
+function parseCredentials(rawValue) {
+  if (!rawValue) {
+    return null;
+  }
+
+  const value = rawValue.trim();
+  const normalized = value.startsWith("'") && value.endsWith("'") ? value.slice(1, -1) : value;
+
+  return JSON.parse(normalized);
+}
+
+async function getSheetsClient() {
+  if (sheetsClient) {
+    return sheetsClient;
+  }
+
+  const spreadsheetId = process.env.GOOGLE_SHEET_ID || process.env.GOOGLE_SHEETS_ID;
+  const credentials = parseCredentials(
+    process.env.GOOGLE_SHEET_CREDENTIALS || process.env.GOOGLE_SHEETS_CREDENTIALS
+  );
+
+  if (!spreadsheetId || !credentials) {
+    return null;
+  }
+
+  try {
+    const auth = new google.auth.GoogleAuth({
+      credentials,
+      scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+    });
+
+    sheetsClient = google.sheets({ version: 'v4', auth });
+    return sheetsClient;
+  } catch (error) {
+    console.error('Google Sheets initialization failed:', error);
+    return null;
+  }
+}
 
 export async function POST(request) {
   try {
     const formData = await request.json();
     const { name, email, phone, eventDate, eventType, package: pkg, venue, notes, message } = formData;
 
-    // Validate required fields
-    if (!name || !email || !phone) {
+    if (!name || !email) {
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
       );
     }
 
-    // 1. Save to Google Sheets
     const timestamp = new Date().toISOString();
-    await sheets.spreadsheets.values.append({
-      spreadsheetId: SPREADSHEET_ID,
-      range: 'Sheet1!A:K', // Adjust based on your sheet structure
-      valueInputOption: 'USER_ENTERED',
-      requestBody: {
-        values: [[
-          timestamp,
-          name,
-          email,
-          phone,
-          eventDate,
-          eventType,
-          pkg || 'Not specified',
-          venue || 'Not specified',
-          notes || 'None',
-          message || 'None',
-          'Pending' // Status column
-        ]],
-      },
-    });
+    const spreadsheetId = process.env.GOOGLE_SHEET_ID || process.env.GOOGLE_SHEETS_ID;
+    let sheetsSaved = false;
+    let sheetsError = null;
+
+    const sheets = await getSheetsClient();
+    if (sheets && spreadsheetId) {
+      try {
+        await sheets.spreadsheets.values.append({
+          spreadsheetId,
+          range: 'Sheet1!A:K',
+          valueInputOption: 'USER_ENTERED',
+          requestBody: {
+            values: [[
+              timestamp,
+              name,
+              email,
+              phone,
+              eventDate,
+              eventType,
+              pkg || 'Not specified',
+              venue || 'Not specified',
+              notes || 'None',
+              message || 'None',
+              'Pending',
+            ]],
+          },
+        });
+        sheetsSaved = true;
+      } catch (error) {
+        sheetsError = error;
+        console.error('Google Sheets append failed:', error);
+      }
+    }
 
     // 2. Send email to business
     await resend.emails.send({
@@ -102,9 +145,11 @@ export async function POST(request) {
       `,
     });
 
-    return NextResponse.json({ 
-      success: true, 
-      message: 'Booking request submitted successfully' 
+    return NextResponse.json({
+      success: true,
+      message: 'Booking request submitted successfully',
+      googleSheetsSaved: sheetsSaved,
+      ...(sheetsError ? { warning: 'Booking email was sent, but Google Sheets could not be updated.' } : {}),
     });
 
   } catch (error) {
