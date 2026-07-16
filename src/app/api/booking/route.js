@@ -49,9 +49,19 @@ async function getSheetsClient() {
 export async function POST(request) {
   try {
     const formData = await request.json();
-    const { name, email, phone, eventDate, eventType, package: pkg, venue, notes, message } = formData;
+    const { name, email, phone, eventDate, eventType, package: pkg, venue, notes, message } = formData ?? {};
 
-    if (!name || !email) {
+    const safeName = typeof name === 'string' ? name.trim() : '';
+    const safeEmail = typeof email === 'string' ? email.trim() : '';
+    const safePhone = typeof phone === 'string' ? phone.trim() : '';
+    const safeEventDate = typeof eventDate === 'string' ? eventDate.trim() : '';
+    const safeEventType = typeof eventType === 'string' ? eventType.trim() : '';
+    const safePkg = typeof pkg === 'string' ? pkg.trim() : '';
+    const safeVenue = typeof venue === 'string' ? venue.trim() : '';
+    const safeNotes = typeof notes === 'string' ? notes.trim() : '';
+    const safeMessage = typeof message === 'string' ? message.trim() : '';
+
+    if (!safeName || !safeEmail) {
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
@@ -73,15 +83,15 @@ export async function POST(request) {
           requestBody: {
             values: [[
               timestamp,
-              name,
-              email,
-              phone,
-              eventDate,
-              eventType,
-              pkg || 'Not specified',
-              venue || 'Not specified',
-              notes || 'None',
-              message || 'None',
+              safeName,
+              safeEmail,
+              safePhone || 'Not provided',
+              safeEventDate || 'Not provided',
+              safeEventType || 'Not provided',
+              safePkg || 'Not specified',
+              safeVenue || 'Not specified',
+              safeNotes || 'None',
+              safeMessage || 'None',
               'Pending',
             ]],
           },
@@ -98,24 +108,24 @@ export async function POST(request) {
       from: 'admin@emeraldcityphotobooth.com', // Replace with your verified domain
       to: 'admin@emeraldcityphotobooth.com', // Replace with your business email,
       bcc: 'vmcnett@gmail.com',
-      subject: `New Photo Booth Booking - ${eventType}`,
+      subject: `New Photo Booth Booking - ${safeEventType || 'General Inquiry'}`,
       html: `
         <h2>New Photo Booth Booking Request</h2>
-        <p><strong>Event Date:</strong> ${eventDate}</p>
+        <p><strong>Event Date:</strong> ${safeEventDate || 'Not provided'}</p>
         <hr />
         <h3>Customer Details</h3>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${phone}</p>
+        <p><strong>Name:</strong> ${safeName}</p>
+        <p><strong>Email:</strong> ${safeEmail}</p>
+        <p><strong>Phone:</strong> ${safePhone || 'Not provided'}</p>
         <hr />
         <h3>Event Details</h3>
-        <p><strong>Event Type:</strong> ${eventType}</p>
-        <p><strong>Package:</strong> ${pkg || 'Not specified'}</p>
-        <p><strong>Venue:</strong> ${venue || 'Not specified'}</p>
+        <p><strong>Event Type:</strong> ${safeEventType || 'Not provided'}</p>
+        <p><strong>Package:</strong> ${safePkg || 'Not specified'}</p>
+        <p><strong>Venue:</strong> ${safeVenue || 'Not specified'}</p>
         <p><strong>Additional Notes:</strong></p>
-        <p>${notes || 'None'}</p>
+        <p>${safeNotes || 'None'}</p>
         <p><strong>Message:</strong></p>
-        <p>${message || 'None'}</p>
+        <p>${safeMessage || 'None'}</p>
         <hr />
         <p><em>Submitted at ${new Date(timestamp).toLocaleString()}</em></p>
       `,
@@ -124,21 +134,21 @@ export async function POST(request) {
     // 3. Send confirmation email to customer
     await resend.emails.send({
       from: 'admin@emeraldcityphotobooth.com', // Replace with your verified domain
-      to: email,
+      to: safeEmail,
       subject: 'Photo Booth Booking Request Received',
       html: `
         <h2>Thank You for Your Booking Request!</h2>
-        <p>Hi ${name},</p>
-        <p>We've received your photo booth booking request for <strong>${eventDate}</strong>.</p>
+        <p>Hi ${safeName},</p>
+        <p>We've received your photo booth booking request for <strong>${safeEventDate || 'your requested date'}</strong>.</p>
         <p>Our team will review your request and get back to you within 24 hours to confirm availability and finalize the details.</p>
         <hr />
         <h3>Your Booking Details</h3>
-        <p><strong>Event Type:</strong> ${eventType}</p>
-        <p><strong>Package:</strong> ${pkg || 'Not specified'}</p>
-        <p><strong>Venue:</strong> ${venue || 'Not specified'}</p>
-        <p><strong>Phone:</strong> ${phone}</p>
-        ${notes ? `<p><strong>Notes:</strong> ${notes}</p>` : ''}
-        ${message ? `<p><strong>Message:</strong> ${message}</p>` : ''}
+        <p><strong>Event Type:</strong> ${safeEventType || 'Not provided'}</p>
+        <p><strong>Package:</strong> ${safePkg || 'Not specified'}</p>
+        <p><strong>Venue:</strong> ${safeVenue || 'Not specified'}</p>
+        <p><strong>Phone:</strong> ${safePhone || 'Not provided'}</p>
+        ${safeNotes ? `<p><strong>Notes:</strong> ${safeNotes}</p>` : ''}
+        ${safeMessage ? `<p><strong>Message:</strong> ${safeMessage}</p>` : ''}
         <hr />
         <p>If you have any questions in the meantime, feel free to reply to this email or call us.</p>
         <p>Best regards,<br/>Your Photo Booth Team</p>
