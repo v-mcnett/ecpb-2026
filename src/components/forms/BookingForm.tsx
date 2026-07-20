@@ -27,33 +27,35 @@ export default function BookingForm() {
     notes: ''
   })
 
-  const handleSubmit = async (formData: React.FormEvent<HTMLFormElement>) => {
-  const response = await fetch('/api/booking', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formData),
-  });
-  
-  const result = await response.json();
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
 
-  console.log(result); // For debugging - remove in production
-  // Handle success/error
-  if (response.ok) {
-    alert('Booking request submitted successfully!');
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      eventDate: '',
-      eventType: '',
-      package: 'silver',
-      venue: '',
-      notes: ''
-    }); // Reset form
-  } else {
-    alert('Failed to submit booking request. Please try again.');
-  } 
-};
+    const response = await fetch('/api/booking', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
+
+    const result = await response.json()
+
+    console.log(result) // For debugging - remove in production
+
+    if (response.ok) {
+      alert('Booking request submitted successfully!')
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        eventDate: '',
+        eventType: '',
+        package: 'silver',
+        venue: '',
+        notes: ''
+      })
+    } else {
+      alert('Failed to submit booking request. Please try again.')
+    }
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
