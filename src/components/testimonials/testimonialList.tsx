@@ -10,7 +10,7 @@ const testimonials = [
     },
     {
         name: 'CL',
-        text: 'I was a little hesitant when my daughter suggested a photo booth for her wedding, but it was the biggest hit at the reception, after the bride and groom. Everyone LOVED IT!! It was so unique and fun. There was costumes to dress up in, accessories, and tons of laughter. The photo&rsquo;s themselves were awesome and extremely quick. No waiting around or having to come back later to pick them up.',
+        text: 'I was a little hesitant when my daughter suggested a photo booth for her wedding, but it was the biggest hit at the reception, after the bride and groom. Everyone LOVED IT!! It was so unique and fun. There was costumes to dress up in, accessories, and tons of laughter. The photo\'s themselves were awesome and extremely quick. No waiting around or having to come back later to pick them up.',
         title: '',
         stars: 4
     },

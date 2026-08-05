@@ -103,6 +103,23 @@ export async function POST(request) {
       }
     }
 
+    console.log('LIne 106'); 
+
+    console.log('Booking request received:', {
+      name: safeName,
+      email: safeEmail, 
+      phone: safePhone,
+      eventDate: safeEventDate,
+      eventType: safeEventType,
+      package: safePkg,
+      venue: safeVenue,
+      notes: safeNotes,
+      message: safeMessage,
+      timestamp,
+    });
+
+    console.log('line 121'); 
+
     // 2. Send email to business
     await resend.emails.send({
       from: 'admin@emeraldcityphotobooth.com', // Replace with your verified domain
@@ -130,6 +147,8 @@ export async function POST(request) {
         <p><em>Submitted at ${new Date(timestamp).toLocaleString()}</em></p>
       `,
     });
+
+    console.log('line 151');
 
     // 3. Send confirmation email to customer
     await resend.emails.send({
