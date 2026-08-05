@@ -95,6 +95,11 @@ export default function ServicesPage() {
             </div>
           </div>
         </div>
+        <div className="mt-8 text-center">
+          <p className="text-lg">
+            $395 deposit secures your date. Ask about custom packages or add-on hours.
+          </p>
+        </div>
       </section>
 
       {/* Additional Features */}
@@ -120,7 +125,9 @@ export default function ServicesPage() {
       <section className="text-center py-8 bg-base-200 rounded-lg">
         <h2 className="text-2xl font-bold mb-4">Need a Custom Package?</h2>
         <p className="mb-6">Contact us to create a package that perfectly fits your event.</p>
-        <button className="btn btn-secondary">Book Now</button>
+        <Link href="/contact" className="btn btn-secondary">
+          Contact Us
+        </Link>
       </section>
     </div>
   )
