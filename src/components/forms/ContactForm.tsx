@@ -3,9 +3,10 @@
 import { Mail, Phone } from 'lucide-react';
 
 export default function ContactForm() {
-    const handleSubmit = async (formData: React.FormEvent<HTMLFormElement>) => {
-    formData.preventDefault();
-    const formDataObj = new FormData(formData.currentTarget);
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formDataObj = new FormData(form);
     const data = {
       name: formDataObj.get('name') as string,
       email: formDataObj.get('email') as string,
@@ -22,12 +23,12 @@ export default function ContactForm() {
 
     console.log(result);
     // Handle success/error
-    if (response.ok) {  
+    if (response.ok) {
       alert('Message sent successfully!');
-      formData.currentTarget.reset();
+      form.reset();
     } else {
       alert('Failed to send message. Please try again later.');
-    } 
+    }
 
   };
 

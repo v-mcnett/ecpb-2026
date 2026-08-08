@@ -4,21 +4,24 @@ import { MessageCircle } from 'lucide-react';
 const testimonials = [
     {
         name: 'Brenna',
-        text: 'So glad we used this business for our wedding .The guests really enjoyed the photos to take home and we loved seeing them after the wedding. It defnitely added to the fun at the reception. No problems whatsoever, great customer service, great price. We would definitely recommend and use again in the future if the opportunity arises. Thank you!',
+        text: 'So glad we used this business for our wedding. The guests really enjoyed the photos to take home and we loved seeing them after the wedding. It definitely added to the fun at the reception. No problems whatsoever, great customer service, great price. We would definitely recommend and use again in the future if the opportunity arises. Thank you!',
         title: '',
-        stars: 5
+        stars: 5,
+        event: 'Wedding',
     },
     {
         name: 'CL',
-        text: 'I was a little hesitant when my daughter suggested a photo booth for her wedding, but it was the biggest hit at the reception, after the bride and groom. Everyone LOVED IT!! It was so unique and fun. There was costumes to dress up in, accessories, and tons of laughter. The photo\'s themselves were awesome and extremely quick. No waiting around or having to come back later to pick them up.',
+        text: 'I was a little hesitant when my daughter suggested a photo booth for her wedding, but it was the biggest hit at the reception, after the bride and groom. Everyone LOVED IT!! It was so unique and fun. There was costumes to dress up in, accessories, and tons of laughter. The photos themselves were awesome and extremely quick. No waiting around or having to come back later to pick them up.',
         title: '',
-        stars: 4
+        stars: 4,
+        event: 'Wedding',
     },
     {
         name: 'Tracy',
         text: 'We had a fabulous experience from start to finish with Emerald City Photo Booth. The owner, Chad, was incredibly nice and easy to work with. He and his assistant worked the photo booth at our son\'s bar mitzvah. It was a huge hit with kids and adults alike! Chad was reliable, friendly and responsive. I recommend Emerald City without any reservations!',
         title: '',
-        stars: 4.5
+        stars: 4.5,
+        event: 'Bar Mitzvah',
     },
 ];
 
@@ -50,6 +53,7 @@ export default function TestimonialList() {
                         </p>
                         <div>
                             <strong>{testimonial.name}</strong>
+                            <i> - {testimonial.event}</i>
                             <div style={{ color: '#888', fontSize: '0.95rem' }}>{testimonial.title}</div>
                         </div>
                     </div>

@@ -23,9 +23,9 @@ export default function Home() {
           <div className="max-w-md">
             <h1 className={`text-5xl font-bold text-white`}>Capture Your Moments</h1>
             <p className={`text-3xl py-8 text-white ${dancingScript.className}`}>
-              Make your event unforgettable with our premium photo booth rentals.
+              Make your event unforgettable with our premium photo booth rentals in Upstate South Carolina.
             </p>
-            <Link href="/book" className="btn bg-white text-primary border-white hover:bg-gray-100 hover:text-primary">Book Now</Link>
+            <Link href="/book" className="btn bg-white text-primary border-white hover:bg-gray-100 hover:text-primary">Check Availability</Link>
           </div>
         </div>
       </section>
@@ -93,7 +93,7 @@ export default function Home() {
         <p className="mb-8">
           Contact us today to check availability for your date.
         </p>
-        <Link href="/contact" className="btn btn-secondary">Book Now</Link>
+        <Link href="/contact" className="btn btn-secondary">Check Availability & Pricing</Link>
 
       </section>
       
