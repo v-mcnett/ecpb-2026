@@ -26,34 +26,40 @@ export default function BookingForm() {
     venue: '',
     notes: ''
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    setIsSubmitting(true)
 
-    const response = await fetch('/api/booking', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    })
-
-    const result = await response.json()
-
-    console.log(result) // For debugging - remove in production
-
-    if (response.ok) {
-      alert('Booking request submitted successfully!')
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        eventDate: '',
-        eventType: '',
-        package: 'silver',
-        venue: '',
-        notes: ''
+    try {
+      const response = await fetch('/api/booking', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
       })
-    } else {
-      alert('Failed to submit booking request. Please try again.')
+
+      const result = await response.json()
+
+      // console.log(result) // For debugging - remove in production
+
+      if (response.ok) {
+        alert('Booking request submitted successfully!')
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          eventDate: '',
+          eventType: '',
+          package: 'silver',
+          venue: '',
+          notes: ''
+        })
+      } else {
+        alert('Failed to submit booking request. Please try again.')
+      }
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -207,8 +213,12 @@ export default function BookingForm() {
       </div>
       {/* Submit Button - full width */}
       <div className="form-control mt-6">
-        <button type="submit" className="btn btn-primary w-full md:w-auto">
-          Submit Booking Request
+        <button
+          type="submit"
+          className="btn btn-primary btn-primary-book w-full md:w-auto"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? 'Submitting...' : 'Submit Booking Request'}
         </button>
       </div>
     </form>

@@ -148,3 +148,10 @@
 }
 
 
+.btn-primary-send-msg {
+  min-width: 130px;
+}
+
+.btn-primary-book {
+  min-width: 200px;
+}

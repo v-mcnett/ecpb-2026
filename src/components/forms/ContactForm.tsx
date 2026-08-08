@@ -1,9 +1,12 @@
 'use client'
 
+import { useState, type FormEvent } from 'react';
 import { Mail, Phone } from 'lucide-react';
 
 export default function ContactForm() {
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
     const formDataObj = new FormData(form);
@@ -13,23 +16,28 @@ export default function ContactForm() {
       message: formDataObj.get('message') as string,
     };
 
-    const response = await fetch('/api/booking', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    });
-  
-    const result = await response.json();
+    setIsSubmitting(true);
 
-    console.log(result);
-    // Handle success/error
-    if (response.ok) {
-      alert('Message sent successfully!');
-      form.reset();
-    } else {
-      alert('Failed to send message. Please try again later.');
+    try {
+      const response = await fetch('/api/booking', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+     // console.log(result);
+      // Handle success/error
+      if (response.ok) {
+        alert('Message sent successfully!');
+        form.reset();
+      } else {
+        alert('Failed to send message. Please try again later.');
+      }
+    } finally {
+      setIsSubmitting(false);
     }
-
   };
 
   return (
@@ -55,7 +63,9 @@ export default function ContactForm() {
               <label htmlFor="message" className="block text-sm font-medium mb-2">Message</label>
               <textarea id="message" name="message" className="textarea" rows={4}></textarea>
             </div>
-            <button type="submit" className="btn btn-primary">Send Message</button>
+            <button type="submit" className="btn btn-primary btn-primary-send-msg" disabled={isSubmitting}>
+              {isSubmitting ? 'Sending...' : 'Send Message'}
+            </button>
           </form>
         </div>
 

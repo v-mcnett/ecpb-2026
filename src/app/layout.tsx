@@ -12,10 +12,10 @@ const fontVariables = `${inter.variable} ${poppins.variable}`
 // Add metadata configuration
 export const metadata: Metadata = {
   title: {
-    template: '%s | Emerald City Photo Booth',
-    default: 'Emerald City Photo Booth',
+    template: '%s | Emerald City Photo Booth - Premium Photo Booth Rentals in Upstate South Carolina',
+    default: 'Emerald City Photo Booth - Premium Photo Booth Rentals in Upstate South Carolina',
   },
-  description: 'Capture the magic of your event with our photo booth services.',
+  description: 'Capture the magic of your wedding, birthday party, or other special event with our photo booth rental services in Upstate South Carolina.',
   keywords: ['photo booth', 'event photography', 'Emerald City'],
   viewport: 'width=device-width, initial-scale=1',
 }
