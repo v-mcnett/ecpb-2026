@@ -3,7 +3,18 @@ import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { google } from 'googleapis';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+export const runtime = 'nodejs';
+
+const resendApiKey = process.env.RESEND_API_KEY;
+const resendFromEmail = process.env.RESEND_FROM_EMAIL || 'vmcnett@gmail.com';
+const resendToEmail = process.env.RESEND_TO_EMAIL || 'mcnettc@gmail.com';
+const resendBccEmail = process.env.RESEND_BCC_EMAIL || 'vmcnett@gmail.com';
+const resend = resendApiKey ? new Resend(resendApiKey) : null;
+
+if (!resendApiKey) {
+  console.error('RESEND_API_KEY is not configured. Email sending will not work.');
+}
+
 
 let sheetsClient = null;
 
@@ -103,11 +114,10 @@ export async function POST(request) {
       }
     }
 
-    console.log('LIne 106'); 
 
     console.log('Booking request received:', {
       name: safeName,
-      email: safeEmail, 
+      email: safeEmail,
       phone: safePhone,
       eventDate: safeEventDate,
       eventType: safeEventType,
@@ -118,68 +128,110 @@ export async function POST(request) {
       timestamp,
     });
 
-    console.log('line 121'); 
+    if (!resend) {
+      console.error('Resend client did not initialize. Check RESEND_API_KEY in environment.');
+      return NextResponse.json(
+        { error: 'Email service not configured' },
+        { status: 500 }
+      );
+    }
 
-    // 2. Send email to business
-    await resend.emails.send({
-      from: 'admin@emeraldcityphotobooth.com', // Replace with your verified domain
-      to: 'admin@emeraldcityphotobooth.com', // Replace with your business email,
-      bcc: 'vmcnett@gmail.com',
-      subject: `New Photo Booth Booking - ${safeEventType || 'General Inquiry'}`,
-      html: `
-        <h2>New Photo Booth Booking Request</h2>
-        <p><strong>Event Date:</strong> ${safeEventDate || 'Not provided'}</p>
-        <hr />
-        <h3>Customer Details</h3>
-        <p><strong>Name:</strong> ${safeName}</p>
-        <p><strong>Email:</strong> ${safeEmail}</p>
-        <p><strong>Phone:</strong> ${safePhone || 'Not provided'}</p>
-        <hr />
-        <h3>Event Details</h3>
-        <p><strong>Event Type:</strong> ${safeEventType || 'Not provided'}</p>
-        <p><strong>Package:</strong> ${safePkg || 'Not specified'}</p>
-        <p><strong>Venue:</strong> ${safeVenue || 'Not specified'}</p>
-        <p><strong>Additional Notes:</strong></p>
-        <p>${safeNotes || 'None'}</p>
-        <p><strong>Message:</strong></p>
-        <p>${safeMessage || 'None'}</p>
-        <hr />
-        <p><em>Submitted at ${new Date(timestamp).toLocaleString()}</em></p>
-      `,
-    });
+    let emailSentToBusiness = false;
+    let emailSentToCustomer = false;
+    let emailErrors = [];
 
-    console.log('line 151');
+    try {
+      console.log('Sending booking email to business', {
+        from: resendFromEmail,
+        to: resendToEmail,
+        bcc: resendBccEmail,
+      });
+      const result = await resend.emails.send({
+        from: resendFromEmail,
+        to: resendToEmail,
+        bcc: resendBccEmail,
+        subject: `New Photo Booth Booking - ${safeEventType || 'General Inquiry'}`,
+        html: `
+          <h2>New Photo Booth Booking Request</h2>
+          <p><strong>Event Date:</strong> ${safeEventDate || 'Not provided'}</p>
+          <hr />
+          <h3>Customer Details</h3>
+          <p><strong>Name:</strong> ${safeName}</p>
+          <p><strong>Email:</strong> ${safeEmail}</p>
+          <p><strong>Phone:</strong> ${safePhone || 'Not provided'}</p>
+          <hr />
+          <h3>Event Details</h3>
+          <p><strong>Event Type:</strong> ${safeEventType || 'Not provided'}</p>
+          <p><strong>Package:</strong> ${safePkg || 'Not specified'}</p>
+          <p><strong>Venue:</strong> ${safeVenue || 'Not specified'}</p>
+          <p><strong>Additional Notes:</strong></p>
+          <p>${safeNotes || 'None'}</p>
+          <p><strong>Message:</strong></p>
+          <p>${safeMessage || 'None'}</p>
+          <hr />
+          <p><em>Submitted at ${new Date(timestamp).toLocaleString()}</em></p>
+        `,
+      });
+     // console.log('Booking email sent to business:', result);
+      emailSentToBusiness = true;
+    } catch (error) {
+     // console.log('Resend business email failed:', error);
+      emailErrors.push({ to: 'business', error });
+      console.error('Resend business email failed:', error);
+    }
 
-    // 3. Send confirmation email to customer
-    await resend.emails.send({
-      from: 'admin@emeraldcityphotobooth.com', // Replace with your verified domain
-      to: safeEmail,
-      subject: 'Photo Booth Booking Request Received',
-      html: `
-        <h2>Thank You for Your Booking Request!</h2>
-        <p>Hi ${safeName},</p>
-        <p>We've received your photo booth booking request for <strong>${safeEventDate || 'your requested date'}</strong>.</p>
-        <p>Our team will review your request and get back to you within 24 hours to confirm availability and finalize the details.</p>
-        <hr />
-        <h3>Your Booking Details</h3>
-        <p><strong>Event Type:</strong> ${safeEventType || 'Not provided'}</p>
-        <p><strong>Package:</strong> ${safePkg || 'Not specified'}</p>
-        <p><strong>Venue:</strong> ${safeVenue || 'Not specified'}</p>
-        <p><strong>Phone:</strong> ${safePhone || 'Not provided'}</p>
-        ${safeNotes ? `<p><strong>Notes:</strong> ${safeNotes}</p>` : ''}
-        ${safeMessage ? `<p><strong>Message:</strong> ${safeMessage}</p>` : ''}
-        <hr />
-        <p>If you have any questions in the meantime, feel free to reply to this email or call us.</p>
-        <p>Best regards,<br/>Your Photo Booth Team</p>
-      `,
-    });
+    try {
+      await resend.emails.send({
+        from: 'vmcnett@gmail.com',
+        to: safeEmail,
+        subject: 'Photo Booth Booking Request Received',
+        html: `
+          <h2>Thank You for Your Booking Request!</h2>
+          <p>Hi ${safeName},</p>
+          <p>We've received your photo booth booking request for <strong>${safeEventDate || 'your requested date'}</strong>.</p>
+          <p>Our team will review your request and get back to you within 24 hours to confirm availability and finalize the details.</p>
+          <hr />
+          <h3>Your Booking Details</h3>
+          <p><strong>Event Type:</strong> ${safeEventType || 'Not provided'}</p>
+          <p><strong>Package:</strong> ${safePkg || 'Not specified'}</p>
+          <p><strong>Venue:</strong> ${safeVenue || 'Not specified'}</p>
+          <p><strong>Phone:</strong> ${safePhone || 'Not provided'}</p>
+          ${safeNotes ? `<p><strong>Notes:</strong> ${safeNotes}</p>` : ''}
+          ${safeMessage ? `<p><strong>Message:</strong> ${safeMessage}</p>` : ''}
+          <hr />
+          <p>If you have any questions in the meantime, feel free to reply to this email or call us.</p>
+          <p>Best regards,<br/>Your Photo Booth Team</p>
+        `,
+      });
+      emailSentToCustomer = true;
+    } catch (error) {
+     // console.log('Resend customer email failed:', error);
+      emailErrors.push({ to: 'customer', error });
+      console.error('Resend customer email failed:', error);
+    }
 
-    return NextResponse.json({
+    //console.log('Email send results:', { emailSentToBusiness, emailSentToCustomer, errors: emailErrors.length });
+
+    const responsePayload = {
       success: true,
       message: 'Booking request submitted successfully',
       googleSheetsSaved: sheetsSaved,
-      ...(sheetsError ? { warning: 'Booking email was sent, but Google Sheets could not be updated.' } : {}),
-    });
+      emailSentToBusiness,
+      emailSentToCustomer,
+    };
+
+    if (emailErrors.length > 0) {
+      responsePayload.emailErrors = emailErrors.map((entry) => ({
+        to: entry.to,
+        message: entry.error?.message || 'Unknown error',
+      }));
+    }
+
+    if (emailErrors.length > 0) {
+      return NextResponse.json(responsePayload, { status: 500 });
+    }
+
+    return NextResponse.json(responsePayload);
 
   } catch (error) {
     console.error('Booking error:', error);
