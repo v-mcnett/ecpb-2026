@@ -11,6 +11,7 @@ const fontVariables = `${inter.variable} ${poppins.variable}`
 
 // Add metadata configuration
 export const metadata: Metadata = {
+  metadataBase: new URL('https://emeraldcityphotobooth.com'),
   title: {
     template: '%s | Emerald City Photo Booth - Premium Photo Booth Rentals in Upstate South Carolina',
     default: 'Emerald City Photo Booth - Premium Photo Booth Rentals in Upstate South Carolina',
@@ -18,6 +19,18 @@ export const metadata: Metadata = {
   description: 'Capture the magic of your wedding, birthday party, or other special event with our photo booth rental services in Upstate South Carolina.',
   keywords: ['photo booth', 'event photography', 'Emerald City'],
   viewport: 'width=device-width, initial-scale=1',
+  openGraph: {
+    title: 'Emerald City Photo Booth',
+    description: 'Premium photo booth rentals for weddings, birthdays, and corporate events in Upstate South Carolina.',
+    url: 'https://emeraldcityphotobooth.com',
+    siteName: 'Emerald City Photo Booth',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Emerald City Photo Booth',
+    description: 'Premium photo booth rentals for weddings, birthdays, and corporate events in Upstate South Carolina.',
+  },
 }
 
 export default function RootLayout({
