@@ -73,6 +73,8 @@ export default function Home() {
                   height={img.height}
                   className="w-full h-full object-cover rounded-xl"
                   loading="lazy"
+                  decoding="async"
+                  sizes="(max-width: 768px) 100vw, 25vw"
                 />
               </div>
             ))}
