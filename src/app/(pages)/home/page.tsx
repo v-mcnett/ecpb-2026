@@ -107,19 +107,14 @@ export default function Home() {
         </div>
       </section>
       
-      {/* Testimonials Section */}
-      <section className="text-center">
-        <TestimonialList /> 
-      </section>
-
-      {/* How It Works Section */}
-      <section className="bg-base-200 rounded-2xl p-8 md:p-10">
-        <div className="max-w-5xl mx-auto text-center">
+      {/* How It Works / CTA Section */}
+      <section className="bg-base-200 rounded-2xl p-8 md:p-10 text-center">
+        <div className="max-w-5xl mx-auto">
           <h2 className="text-3xl font-bold mb-3">How It Works</h2>
           <p className="text-lg text-base-content/70 mb-8">
-            Booking your photo booth is simple, fast, and fun.
+            Booking your photo booth is simple, fast, and fun. Here’s how it comes together.
           </p>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-6 mb-10">
             <div className="card bg-base-100 shadow-md">
               <div className="card-body">
                 <div className="text-4xl font-bold text-primary mb-2">1</div>
@@ -142,19 +137,12 @@ export default function Home() {
               </div>
             </div>
           </div>
+          <h3 className="text-2xl font-bold mb-4">Ready to Make Your Event Memorable?</h3>
+          <p className="mb-8">
+            Contact us today to check availability for your date.
+          </p>
+          <Link href="/contact" className="btn btn-secondary">Check Availability & Pricing</Link>
         </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="text-center py-16">
-        <h2 className="text-3xl font-bold mb-4">
-          Ready to Make Your Event Memorable?
-        </h2>
-        <p className="mb-8">
-          Contact us today to check availability for your date.
-        </p>
-        <Link href="/contact" className="btn btn-secondary">Check Availability & Pricing</Link>
-
       </section>
       
     </div>
