@@ -85,10 +85,10 @@ export default function Home() {
           <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">Real Moments. Real Smiles. <Laugh className="w-6 h-6" /></h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
-              { src: "/images/events/20130119210452.jpg", alt: "Bride and groom posing with props", width: 290, height: 218 },
-               { src: "/images/events/20130825201233.jpg", alt: "Couple posing with props", width: 290, height: 218 },
-              { src: "/images/events/20130323194403.jpg", alt: "Friends posing with props", width: 290, height: 218 },
-              { src: "/images/events/20130825175713.jpg", alt: "Friends posing with props", width: 290, height: 218 },
+              { src: "/images/events/20130609203651_P0.jpg", alt: "Groom with friends in photobooth", width: 290, height: 218 },
+               { src: "/images/events/20120612005023_P1.bmp", alt: "Friends posing in classic photobooth", width: 290, height: 218 },
+              { src: "/images/events/20130609172239_P1.jpg", alt: "Friends posing with props in modern photobooth", width: 290, height: 218 },
+              { src: "/images/events/20171021201238_P3.bmp", alt: "Couple having fun in photobooth", width: 290, height: 218 },
          ].map((img) => (
               <div key={img.src} className="relative">
                 <Image
