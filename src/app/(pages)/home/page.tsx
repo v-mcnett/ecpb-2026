@@ -52,8 +52,6 @@ export default function Home() {
         </div>
       </section>
 
-
-
       {/* Social proof image grid */}
       <section>
         <div className="container mx-auto pb-12">
@@ -78,6 +76,39 @@ export default function Home() {
                 />
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+            {/* How It Works Section */}
+      <section className="bg-base-200 rounded-2xl p-8 md:p-10">
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-3">How It Works</h2>
+          <p className="text-lg text-base-content/70 mb-8">
+            Booking your photo booth is simple, fast, and fun.
+          </p>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="card bg-base-100 shadow-md">
+              <div className="card-body">
+                <div className="text-4xl font-bold text-primary mb-2">1</div>
+                <h3 className="card-title justify-center">Tell Us About Your Event</h3>
+                <p>Share your date, location, guest count, and vibe so we can recommend the best setup.</p>
+              </div>
+            </div>
+            <div className="card bg-base-100 shadow-md">
+              <div className="card-body">
+                <div className="text-4xl font-bold text-primary mb-2">2</div>
+                <h3 className="card-title justify-center">We Handle the Details</h3>
+                <p>We coordinate delivery, setup, and styling so everything is ready when your guests arrive.</p>
+              </div>
+            </div>
+            <div className="card bg-base-100 shadow-md">
+              <div className="card-body">
+                <div className="text-4xl font-bold text-primary mb-2">3</div>
+                <h3 className="card-title justify-center">Enjoy the Memories</h3>
+                <p>Your guests snap, share, and celebrate while we deliver the highlights after the event.</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
