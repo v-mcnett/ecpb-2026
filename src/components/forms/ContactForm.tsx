@@ -5,6 +5,7 @@ import { Mail, Phone } from 'lucide-react';
 
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -27,12 +28,12 @@ export default function ContactForm() {
 
       const result = await response.json();
 
-     // console.log(result);
-      // Handle success/error
+      // console.log(result);
       if (response.ok) {
-        alert('Message sent successfully!');
+        setSuccessMessage('Thank you for reaching out! We will be in touch soon.');
         form.reset();
       } else {
+        setSuccessMessage('');
         alert('Failed to send message. Please try again later.');
       }
     } finally {
@@ -41,7 +42,7 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto py-8">
+    <div className="max-w-4xl mx-auto pb-8">
       <h1 className="text-4xl font-bold mb-8">Contact Us</h1>
       <div className="prose lg:prose-xl">
         <p>Want a photo booth for your big day or team party? Drop us a note with the date, location, and guest count. We&rsquo;ll take it from there.</p>
@@ -63,6 +64,11 @@ export default function ContactForm() {
               <label htmlFor="message" className="block text-sm font-medium mb-2">Message</label>
               <textarea id="message" name="message" className="textarea" rows={4}></textarea>
             </div>
+            {successMessage && (
+              <div className="mb-4 p-3">
+                {successMessage}
+              </div>
+            )}
             <button type="submit" className="btn btn-primary btn-primary-send-msg" disabled={isSubmitting}>
               {isSubmitting ? 'Sending...' : 'Send Message'}
             </button>

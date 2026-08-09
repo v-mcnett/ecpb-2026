@@ -27,6 +27,7 @@ export default function BookingForm() {
     notes: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [successMessage, setSuccessMessage] = useState('')
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -44,7 +45,7 @@ export default function BookingForm() {
       // console.log(result) // For debugging - remove in production
 
       if (response.ok) {
-        alert('Booking request submitted successfully!')
+        setSuccessMessage('Thank you! Your booking request has been received. We will be in touch soon.')
         setFormData({
           name: '',
           email: '',
@@ -56,6 +57,7 @@ export default function BookingForm() {
           notes: ''
         })
       } else {
+        setSuccessMessage('')
         alert('Failed to submit booking request. Please try again.')
       }
     } finally {
@@ -213,6 +215,11 @@ export default function BookingForm() {
       </div>
       {/* Submit Button - full width */}
       <div className="form-control mt-6">
+        {successMessage && (
+          <div className="mb-4 rounded-md border border-base-300 bg-base-100 p-3 text-sm text-base-content/80">
+            {successMessage}
+          </div>
+        )}
         <button
           type="submit"
           className="btn btn-primary btn-primary-book w-full md:w-auto"

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function ServicesPage() {
   return (
-    <div className="max-w-4xl mx-auto py-8">
+    <div className="max-w-4xl mx-auto pb-8">
       <h1 className="text-4xl font-bold mb-8">Our Services</h1>
       
       {/* Introduction Section */}
@@ -122,7 +122,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Contact CTA */}
-      <section className="text-center py-8 bg-base-200 rounded-lg">
+      <section className="text-center pb-8 bg-base-200 rounded-lg">
         <h2 className="text-2xl font-bold mb-4">Need a Custom Package?</h2>
         <p className="mb-6">Contact us to create a package that perfectly fits your event.</p>
         <Link href="/contact" className="btn btn-secondary">

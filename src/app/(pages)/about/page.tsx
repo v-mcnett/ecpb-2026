@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <div className="max-w-4xl mx-auto py-8">
+      <div className="max-w-4xl mx-auto pb-8">
         <h1 className="text-4xl font-bold mb-8">About Us</h1>
         <div className="prose lg:prose-xl">
           <p className="mb-6">Emerald City Photo Booth is a family-owned, local business dedicated to making your celebrations unforgettable. We provide stylish, high-quality photo booth rentals for weddings, corporate events, birthdays, proms, graduations, and more, bringing fun, personality, and lasting memories to every occasion.</p>

@@ -15,6 +15,8 @@
   --color-primary-lighter: #E1F1E8; /* 90% lighter - good for hover states */
   --color-primary-subtle: #D2EADC; /* 85% lighter - for borders or dividers */
 
+  --color-black-lighter: #9b9999; /* 90% lighter - for subtle text */
+
 
   --ecpb-primary: var(--color-primary);
   --ecpb-primary-hover: color-mix(in srgb, var(--color-primary) 90%, black 10%);
@@ -154,4 +156,8 @@
 
 .btn-primary-book {
   min-width: 200px;
+}
+
+input, textarea {
+  border: 1px solid var(--color-black-lighter);
 }
