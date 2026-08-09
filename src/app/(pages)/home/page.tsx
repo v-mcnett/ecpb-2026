@@ -32,19 +32,46 @@ export default function Home() {
 
       {/* Features Section */}
       <section className="grid md:grid-cols-3 gap-8">
-        <div className="card bg-base-100 shadow-xl">
+        <div className="card bg-base-100 shadow-xl overflow-hidden">
+          <Image
+            src="/images/events/idosodo.jpg"
+            alt="Vintage-style photo booth setup"
+            width={400}
+            height={240}
+            className="h-48 w-full object-cover"
+            loading="lazy"
+            decoding="async"
+          />
           <div className="card-body">
             <h2 className="card-title">Vintage-Style Equipment</h2>
             <p>Experience the charm of classic photo booths with our vintage-style equipment.</p>
           </div>
         </div>
-        <div className="card bg-base-100 shadow-xl">
+        <div className="card bg-base-100 shadow-xl overflow-hidden">
+          <Image
+            src="/images/photobooths/propbox_v2.jpg"
+            alt="Guests using fun photo booth props"
+            width={400}
+            height={240}
+            className="h-48 w-full object-cover"
+            loading="lazy"
+            decoding="async"
+          />
           <div className="card-body">
             <h2 className="card-title">Custom Props</h2>
             <p>Extensive collection of fun props to make your photos unique.</p>
           </div>
         </div>
-        <div className="card bg-base-100 shadow-xl">
+        <div className="card bg-base-100 shadow-xl overflow-hidden">
+          <Image
+            src="/images/events/IMG_2606.jpg"
+            alt="Guests sharing photos from the booth"
+            width={400}
+            height={240}
+            className="h-48 w-full object-cover"
+            loading="lazy"
+            decoding="async"
+          />
           <div className="card-body">
             <h2 className="card-title">Instant Sharing</h2>
             <p>Digital delivery and social media integration included.</p>
@@ -79,8 +106,13 @@ export default function Home() {
           </div>
         </div>
       </section>
+      
+      {/* Testimonials Section */}
+      <section className="text-center">
+        <TestimonialList /> 
+      </section>
 
-            {/* How It Works Section */}
+      {/* How It Works Section */}
       <section className="bg-base-200 rounded-2xl p-8 md:p-10">
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-3">How It Works</h2>
@@ -111,11 +143,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
-      
-      {/* Testimonials Section */}
-      <section className="text-center">
-        <TestimonialList /> 
       </section>
 
       {/* CTA Section */}
