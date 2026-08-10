@@ -7,13 +7,12 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <>
-      <div className="max-w-4xl mx-auto pb-8">
-        <section className="mb-10">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-primary">
+    <div className="mx-auto w-full max-w-6xl px-4 pb-8 sm:px-6 lg:px-8">
+        <section>
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary">
             Premium photo booth experiences
           </p>
-          <h1 className="mb-4 text-3xl font-bold leading-tight">
+          <h1 className="text-3xl font-bold">
             Memories that feel just as good as the celebration itself.
           </h1>
         </section>
@@ -29,9 +28,6 @@ export default function AboutPage() {
         <p className="mt-3 text-sm text-base-content/60">
           Prefer to chat? <a href="tel:+18646253580" className="link link-primary">Call or text us</a>.
         </p>
-      </div>
-
-
-    </>
+    </div>
   )
 }

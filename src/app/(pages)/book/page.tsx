@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function BookingPage() {
   return (
-    <div className="mx-auto max-w-6xl pb-8">
+    <div className="mx-auto w-full max-w-6xl px-4 pb-8 sm:px-6 lg:px-8">
       <section className="mb-0 overflow-hidden rounded-[2rem] rounded-b-none border border-base-300 bg-base-100 shadow-xl">
         <div className="grid lg:grid-cols-[1.05fr_0.95fr]">
           <div className="flex flex-col justify-center p-8 lg:p-12">

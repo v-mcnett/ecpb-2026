@@ -43,7 +43,7 @@ export default function ContactForm() {
 
   return (
     <div className="max-w-4xl mx-auto pb-8">
-      <div className="mb-8">
+      <div>
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary">Contact Us</p>
           <h2 className="text-3xl font-bold">Get in Touch</h2>
