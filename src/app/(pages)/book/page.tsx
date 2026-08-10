@@ -17,7 +17,7 @@ export default function BookingPage() {
             <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-primary">
               Reserve your experience
             </p>
-            <h1 className="mb-4 text-4xl font-bold leading-tight md:text-5xl">
+            <h1 className="mb-4 text-3xl font-bold leading-tight">
               Bring the photo booth fun to your next event.
             </h1>
             <p className="mb-6 text-lg text-base-content/80">

@@ -13,7 +13,7 @@ export default function AboutPage() {
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-primary">
             Premium photo booth experiences
           </p>
-          <h1 className="mb-4 text-3xl font-bold leading-tight md:text-5xl">
+          <h1 className="mb-4 text-3xl font-bold leading-tight">
             Memories that feel just as good as the celebration itself.
           </h1>
         </section>

@@ -43,10 +43,14 @@ export default function ContactForm() {
 
   return (
     <div className="max-w-4xl mx-auto pb-8">
-      <h1 className="text-4xl font-bold mb-8">Contact Us</h1>
-      <div className="prose lg:prose-xl">
-        <p>Want a photo booth for your big day or team party? Drop us a note with the date, location, and guest count. We&rsquo;ll take it from there.</p>
+      <div className="mb-8">
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary">Contact Us</p>
+          <h2 className="text-3xl font-bold">Get in Touch</h2>
+        </div>
+        <p className="text-base-content/70">Want a photo booth for your big day or team party? Drop us a note with the date, location, and guest count. We&rsquo;ll take it from there.</p>
       </div>
+
       <div className="mt-8 flex flex-col md:flex-row gap-8">
         <div className="flex-1">
           <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">Send Us a Message <Mail className="w-6 h-6" /></h2>
