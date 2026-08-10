@@ -29,9 +29,16 @@ const renderStars = (stars: number) => {
     return (
         <div className="flex items-center gap-1 mb-4">
             {[...Array(fullStars)].map((_, idx) => (
-                <Star key={idx} className="w-4 h-4 text-primary" />
+                <Star key={idx} className="w-4 h-4 text-primary" fill="currentColor" />
             ))}
-            {hasHalf && <Star className="w-4 h-4 text-primary/80" />}
+            {hasHalf && (
+                <span className="relative inline-block w-4 h-4">
+                    <Star className="absolute inset-0 w-4 h-4 text-base-content/40" />
+                    <span className="absolute inset-y-0 left-0 w-2 overflow-hidden">
+                        <Star className="w-4 h-4 text-primary" fill="currentColor" />
+                    </span>
+                </span>
+            )}
             {[...Array(5 - Math.ceil(stars))].map((_, idx) => (
                 <Star key={`empty-${idx}`} className="w-4 h-4 text-base-content/40" />
             ))}
@@ -49,7 +56,7 @@ export default function TestimonialList() {
                         <MessageCircle className="w-6 h-6 text-primary" />
                     </h2>
                     <p className="text-base-content/70 max-w-2xl mx-auto">
-                        Trusted by local brides, families, and event planners for memorable photo booth experiences.
+                        Trusted by brides, families, and event planners for memorable photo booth experiences.
                     </p>
                 </div>
 
