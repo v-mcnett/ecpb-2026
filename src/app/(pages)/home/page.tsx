@@ -21,11 +21,11 @@ export default function Home() {
         <div className="hero-overlay bg-opacity-60 rounded-lg"></div>
         <div className="hero-content text-center relative z-10">
           <div className="max-w-md">
-            <h1 className={`text-5xl font-bold text-white`}>Capture Your Moments</h1>
-            <p className={`text-3xl pb-8 text-white ${dancingScript.className}`}>
+            <h3 className={`text-5xl font-bold text-white`}>Capture Your Moments</h3>
+            <h1 className={`text-3xl pb-8 text-white ${dancingScript.className}`}>
               Make your event unforgettable with our premium photo booth rentals in Upstate South Carolina.
-            </p>
-            <Link href="/book" className="btn bg-white text-primary border-white hover:bg-gray-100 hover:text-primary">Check Availability</Link>
+            </h1>
+            <Link href="/book" className="btn bg-white text-primary border-white hover:bg-gray-100 hover:text-primary">Check Availability & Pricing</Link>
           </div>
         </div>
       </section>
