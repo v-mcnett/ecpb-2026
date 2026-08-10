@@ -79,6 +79,11 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Customer Testimonials Section */}
+      <section>
+        <TestimonialList />
+      </section>
+
       {/* Social proof image grid */}
       <section>
         <div className="container mx-auto pb-12">
