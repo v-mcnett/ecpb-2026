@@ -7,11 +7,16 @@ export const metadata: Metadata = {
 
 export default function GalleryPage() {
   return (
-    <div className="max-w-4xl mx-auto pb-8">
-      <h1 className="text-4xl font-bold mb-8">Gallery</h1>
-      <div className="prose lg:prose-xl">
-        <p>Galleries coming soon!</p>
-      </div>
+    <div className="mx-auto w-full max-w-6xl px-4 pb-8 sm:px-6 lg:px-8">
+      <section>
+        <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary">
+          Photo Booth Gallery
+        </p>
+        <h1 className="text-3xl font-bold">
+          
+        </h1>
+        <p>Coming Soon!</p>
+      </section>
     </div>
   )
 }
