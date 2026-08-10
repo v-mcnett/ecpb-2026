@@ -9,7 +9,14 @@ export default function AboutPage() {
   return (
     <>
       <div className="max-w-4xl mx-auto pb-8">
-        <h1 className="text-4xl font-bold mb-8">About Us</h1>
+        <section className="mb-10">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-primary">
+            Premium photo booth experiences
+          </p>
+          <h1 className="mb-4 text-3xl font-bold leading-tight md:text-5xl">
+            Memories that feel just as good as the celebration itself.
+          </h1>
+        </section>
         <div className="prose lg:prose-xl">
           <p className="mb-6">Emerald City Photo Booth is a family-owned, local business dedicated to making your celebrations unforgettable. We provide stylish, high-quality photo booth rentals for weddings, corporate events, birthdays, proms, graduations, and more, bringing fun, personality, and lasting memories to every occasion.</p>
 
