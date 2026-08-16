@@ -172,7 +172,7 @@ export async function POST(request) {
           <p><em>Submitted at ${new Date(timestamp).toLocaleString()}</em></p>
         `,
       });
-     // console.log('Booking email sent to business:', result);
+      console.log('Booking email sent to business:', result);
       emailSentToBusiness = true;
     } catch (error) {
      // console.log('Resend business email failed:', error);
@@ -181,7 +181,7 @@ export async function POST(request) {
     }
 
     try {
-      await resend.emails.send({
+      const customerEmailResult = await resend.emails.send({
         from: 'admin@emeraldcityphotobooth.com',
         to: safeEmail,
         subject: 'Photo Booth Booking Request Received',
@@ -203,6 +203,8 @@ export async function POST(request) {
           <p>Best regards,<br/>Your Photo Booth Team</p>
         `,
       });
+
+      console.log('Booking confirmation email sent to customer:', customerEmailResult);
       emailSentToCustomer = true;
     } catch (error) {
      // console.log('Resend customer email failed:', error);
@@ -210,7 +212,7 @@ export async function POST(request) {
       console.error('Resend customer email failed:', error);
     }
 
-    //console.log('Email send results:', { emailSentToBusiness, emailSentToCustomer, errors: emailErrors.length });
+    console.log('Email send results:', { emailSentToBusiness, emailSentToCustomer, errors: emailErrors.length });
 
     const responsePayload = {
       success: true,
