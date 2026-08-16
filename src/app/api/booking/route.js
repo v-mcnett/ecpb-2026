@@ -6,7 +6,7 @@ import { google } from 'googleapis';
 export const runtime = 'nodejs';
 
 const resendApiKey = process.env.RESEND_API_KEY;
-const resendFromEmail = process.env.RESEND_FROM_EMAIL || 'vmcnett@gmail.com';
+const resendFromEmail = process.env.RESEND_FROM_EMAIL || 'admin@emeraldcityphotobooth.com';
 const resendToEmail = process.env.RESEND_TO_EMAIL || 'mcnettc@gmail.com';
 const resendBccEmail = process.env.RESEND_BCC_EMAIL || 'vmcnett@gmail.com';
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
@@ -182,7 +182,7 @@ export async function POST(request) {
 
     try {
       await resend.emails.send({
-        from: 'vmcnett@gmail.com',
+        from: 'admin@emeraldcityphotobooth.com',
         to: safeEmail,
         subject: 'Photo Booth Booking Request Received',
         html: `
