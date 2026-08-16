@@ -81,8 +81,8 @@ export default function ContactForm() {
 
         <div className="flex-1 text-gray-600">
           <h2 className="text-2xl font-bold mb-4">Other Ways to Reach Us</h2>
-          <p><Mail className="inline-block w-4 h-4 mr-1" />Email: <a href="mailto:info@emeraldcityphotobooth.com">info@emeraldcityphotobooth.com</a></p>
-          <p><Phone className="inline-block w-4 h-4 mr-1" />Phone: <a href="tel:+18646253580">(864) 625-3580</a></p>
+          <p className="flex items-center gap-2 mb-2"><Mail className="inline-block w-4 h-4 mr-1 " />Email: <a href="mailto:info@emeraldcityphotobooth.com">info@emeraldcityphotobooth.com</a></p>
+          <p className="flex items-center gap-2 mb-2"><Phone className="inline-block w-4 h-4 mr-1" />Phone: <a href="tel:+18646253580">(864) 625-3580</a></p>
         </div>
       </div>
 
