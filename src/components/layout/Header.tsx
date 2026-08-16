@@ -20,7 +20,7 @@ export default function Header() {
           </ul>
         </div>
         <Link href="/" className="flex items-center gap-3 mx-auto lg:mx-0">
-          <div className="h-24 md:h-32 lg:h-36 flex items-center">
+          <div className="h-20 md:h-28 lg:h-28 flex items-center">
             <Image
               src="/images/ecpb_logo.webp"
               alt="Emerald City Photo Booth Logo"
