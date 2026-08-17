@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'About',
@@ -16,6 +17,16 @@ export default function AboutPage() {
             Memories that feel just as good as the celebration itself.
           </h1>
         </section>
+        <div className="my-8">
+          <Image
+            src="/images/events/DSC_1869.jpg"
+            alt="Event photo"
+            width={1200}
+            height={800}
+            className="w-full h-80 md:h-[40rem] object-cover object-top rounded-xl"
+            priority
+          />
+        </div>
         <div className="prose lg:prose-xl">
           <p className="mb-6">Emerald City Photo Booth is a family-owned, local business dedicated to making your celebrations unforgettable. We provide stylish, high-quality photo booth rentals for weddings, corporate events, birthdays, proms, graduations, and more, bringing fun, personality, and lasting memories to every occasion.</p>
 
