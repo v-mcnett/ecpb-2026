@@ -42,7 +42,7 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto pb-8">
+    <div className="w-full mx-auto pb-8">
       <div>
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary">Contact Us</p>
