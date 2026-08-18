@@ -34,7 +34,7 @@ export default function AboutPage() {
         </div>
         <div className="flex flex-wrap gap-3">
           <a href="/book" className="btn btn-primary">Book Your Booth</a>
-          <a href="/availability" className="btn btn-accent">Check Availability</a>
+          <a href="/contact" className="btn btn-accent">Check Availability</a>
         </div>
         <p className="mt-3 text-sm text-base-content/60">
           Prefer to chat? <a href="tel:+18646253580" className="link link-primary">Call or text us</a>.
