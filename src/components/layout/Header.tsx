@@ -11,7 +11,7 @@ export default function Header() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
             </svg>
           </div>
-          <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-4 shadow bg-base-100 rounded-box w-72 text-lg space-y-1">
+          <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[9999] p-4 shadow bg-base-100 rounded-box w-72 text-lg space-y-1">
             <li><Link href="/" className="block py-3 px-4 text-lg">Home</Link></li>
             <li><Link href="/about" className="block py-3 px-4 text-lg">About</Link></li>
             <li><Link href="/services" className="block py-3 px-4 text-lg">Services</Link></li>
