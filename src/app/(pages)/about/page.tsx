@@ -23,7 +23,7 @@ export default function AboutPage() {
             alt="Event photo"
             width={1200}
             height={800}
-            className="w-full h-80 md:h-[40rem] object-cover object-top rounded-xl"
+            className="w-full h-80 md:h-[40rem] object-cover object-right-top rounded-xl"
             priority
           />
         </div>
